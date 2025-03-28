@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Bubbler+One&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --dark-color: #343a40;
+  --light-color: #f8f9fa;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+}
+
+* {
+  font-family: Inter, "sans-serif";
+}
+
+/* Default nav styles */
+.nav-link {
+  color: var(--secondary-color);
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.nav-link:hover {
+  color: var(--dark-color) !important;
+  /* font-weight: bold; */
+}
+
+/* Active state with animation */
+.nav-link.active {
+  color: var(--dark-color) !important;
+  font-weight: bold;
+  transform: scale(1.05) !important; /* Slight scaling */
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-container {
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.menu-container.show {
+  transform: translateX(0);
+}
+
+.header {
+  transition: transform 0.3s ease-in-out;
+}
+.hidden {
+  transform: translateY(-100%);
+}
+
+.accordion-button:focus,
+.accordion-button:not(.collapsed) {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+.half-pink {
+  background: linear-gradient(to bottom, white 50%, #f7b79c 50%);
+}
+
+.scroll-container {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card {
+  width: calc(100% / 4 - 16px); 
+  min-width: 180px; 
+}
+@media (max-width: 768px) {
+  .card {
+    width: calc(100% / 4 - 16px); 
+    /* width: 50px; */
+  }
+}
+
+.swiper {
+  width: 100%;
+}
+
+.diamond-card {
+  width: 240px; 
+  /* border-radius: 5px; */
+  overflow: hidden;
+  /* padding: 15px; */
+  text-align: center;
+}
+
+.diamond-card img {
+  width: 100%;
+  height: auto;
+}
+
+.swiper-slide {
+  width: 200px;
+
+.swiper {
+  width: 100%;
+  height: 500px; 
+}
+
+.swiper-wrapper{
+  height: 400px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card-desc {
+  font-size: 14px;
+}
