@@ -12,6 +12,213 @@
   <link rel="stylesheet" href="styles.css">
   <title>Key Idea</title>
   <!-- https://keyidea.netlify.app/ -->
+  <style>
+    .hero-section {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .rings-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      perspective: 1000px;
+    }
+
+    .ring {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      cursor: pointer;
+      transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+
+    .ring.active {
+      transform: translateY(-150%) translateX(350%) scale(2);
+      z-index: 10;
+      background-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .ring.left {
+      transform: translateY(50%) translateX(-50%) translateZ(-100px) scale(0.5);
+      opacity: 0.7;
+    }
+
+    .ring.right {
+      transform: translateY(50%) translateX(700%) translateZ(-100px) scale(0.5);
+      opacity: 0.7;
+    }
+
+    /* Media Query for max-width: 768px */
+    @media (max-width: 1400px) {
+
+
+      .ring.active {
+        transform: translateY(-100%) translateX(275%) scale(1.4);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(65%) translateX(-50%) translateZ(-100px) scale(0.7);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(75%) translateX(600%) translateZ(-225px) scale(0.7);
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .hero-section {
+        height: 50vh;
+      }
+
+      .ring.active {
+        transform: translateY(-100%) translateX(210%) scale(1.4);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(20%) translateX(-50%) translateZ(-100px) scale(0.7);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(40%) translateX(475%) translateZ(-225px) scale(0.7);
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .ring.active {
+        transform: translateY(-100%) translateX(170%) scale(1.4);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(20%) translateX(-60%) translateZ(-100px) scale(0.7);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(40%) translateX(400%) translateZ(-225px) scale(0.7);
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .ring.active {
+        transform: translateY(-100%) translateX(150%) scale(1.4);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(20%) translateX(-25%) translateZ(-100px) scale(0.7);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(40%) translateX(350%) translateZ(-225px) scale(0.7);
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+
+      .ring.active {
+        transform: translateY(-125%) translateX(100%) scale(1.25);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(20%) translateX(-75%) translateZ(-100px) scale(0.65);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(20%) translateX(250%) translateZ(-100px) scale(0.65);
+        opacity: 0.7;
+      }
+    }
+
+    /* Media Query for max-width: 576px (smaller screens) */
+    @media (max-width: 677px) {
+      .ring.active {
+        transform: translateY(-100%) translateX(100%) scale(1.25);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(20%) translateX(-25%) translateZ(-100px) scale(0.6);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(20%) translateX(210%) translateZ(-100px) scale(0.6);
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .ring.active {
+        transform: translateY(-100%) translateX(100%) scale(1.1);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(20%) translateX(-25%) translateZ(-100px) scale(0.4);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(20%) translateX(210%) translateZ(-100px) scale(0.4);
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .ring.active {
+        transform: translateY(-100%) translateX(70%) scale(1);
+        z-index: 10;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .ring.left {
+        transform: translateY(20%) translateX(-25%) translateZ(-100px) scale(0.35);
+        opacity: 0.7;
+      }
+
+      .ring.right {
+        transform: translateY(20%) translateX(150%) translateZ(-100px) scale(0.35);
+        opacity: 0.7;
+      }
+    }
+  </style>
 </head>
 
 <body class="min-vh-100">
@@ -179,7 +386,44 @@
 
 
 
+
+
+
   <div class="" style="padding-top: 100px;">
+
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="rings-container" id="ringsContainer">
+          <div class="ring left" data-position="left" id="ring1">
+            <div class="ring-content"><img src="/images/heroImg1.png" width="100px" class="img-fluid" alt=""></div>
+          </div>
+          <div class="ring active" data-position="active" id="ring2">
+            <div class="ring-content"><img src="/images/heroImg.png" width="100px" class="img-fluid" alt=""></div>
+          </div>
+          <div class="ring right" data-position="right" id="ring3">
+            <div class="ring-content"><img src="/images/heroImg2.png" width="500px" class="img-fluid" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <!-- <div class="swiper swiper1 m-auto">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="/images/diamond1.png" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="/images/diamond2.png" class="img-fluid" alt=""></div>
+          <div class="swiper-slide"><img src="/images/diamond3.png" class="img-fluid" alt=""></div>
+        </div>
+      </div> -->
+    </section>
+
+    <!-- /Hero Section -->
+
 
     <!-- Our Collection -->
     <section class="container-fluid py-5 half-pink">
@@ -239,7 +483,7 @@
           Every diamond in our collection is selected for its superior cut, symmetry, and shape.
         </p>
       </div>
-      <div class="swiper">
+      <div class="swiper swiper2">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
           <!-- Slides -->
@@ -458,6 +702,91 @@
 
 
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const rings = document.querySelectorAll('.ring');
+
+      // Add click event listeners to each ring
+      rings.forEach(ring => {
+        ring.addEventListener('click', function () {
+          // Skip if already active
+          if (this.classList.contains('active')) return;
+
+          const currentPosition = this.getAttribute('data-position');
+          const activeRing = document.querySelector('.ring.active');
+          const activePosition = activeRing.getAttribute('data-position');
+
+          // Determine rotation direction
+          const clockwise = (currentPosition === 'left' && activePosition === 'active') ||
+            (currentPosition === 'active' && activePosition === 'right') ||
+            (currentPosition === 'right' && activePosition === 'left');
+
+          // Update positions based on clicked ring
+          if (currentPosition === 'left') {
+            // Left ring was clicked - rotate clockwise
+            updatePositions(clockwise);
+          } else if (currentPosition === 'right') {
+            // Right ring was clicked - rotate counter-clockwise
+            updatePositions(clockwise);
+          }
+        });
+      });
+
+      // Function to update positions of all rings
+      function updatePositions(clockwise) {
+        const positions = ['left', 'active', 'right'];
+
+        // Get current position of each ring
+        const currentPositions = {};
+        rings.forEach(ring => {
+          currentPositions[ring.id] = ring.getAttribute('data-position');
+        });
+
+        // Calculate new positions
+        const newPositions = {};
+        for (const [ringId, position] of Object.entries(currentPositions)) {
+          const currentIndex = positions.indexOf(position);
+          let newIndex;
+
+          if (clockwise) {
+            // Rotate clockwise
+            newIndex = (currentIndex + 1) % positions.length;
+          } else {
+            // Rotate counter-clockwise
+            newIndex = (currentIndex - 1 + positions.length) % positions.length;
+          }
+
+          newPositions[ringId] = positions[newIndex];
+        }
+
+        // Apply new positions
+        for (const [ringId, newPosition] of Object.entries(newPositions)) {
+          const ring = document.getElementById(ringId);
+
+          // Remove all position classes
+          ring.classList.remove('left', 'active', 'right');
+
+          // Add new position class
+          ring.classList.add(newPosition);
+
+          // Update data attribute
+          ring.setAttribute('data-position', newPosition);
+        }
+      }
+
+      // Add automatic rotation for demo purposes (optional)
+      let autoRotate = setInterval(() => {
+        updatePositions(true);
+      }, 5000);
+
+      // Stop auto-rotation when user interacts
+      rings.forEach(ring => {
+        ring.addEventListener('click', () => {
+          clearInterval(autoRotate);
+        });
+      });
+    });
+  </script>
 
 
 

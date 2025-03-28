@@ -117,3 +117,123 @@
 .card-desc {
   font-size: 14px;
 }
+
+.swiper1 {
+  width: 100%;
+  height: 500px;
+}
+
+.swiper1 .swiper-wrapper {
+  display: flex;
+  align-items: center;
+  overflow: visible; /* Prevent clipping */
+}
+
+.swiper1 .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  transition: transform 0.5s ease-in-out;
+  transform-origin: center;
+}
+
+/* Scale up the active slide */
+.swiper1 .swiper-slide-active {
+  transform: scale(2); /* 2x bigger */
+  z-index: 10;
+}
+
+/* Ensure the image fills its container */
+.swiper1 .swiper-slide img {
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+
+
+.hero-section {
+  /* position: relative; */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rings-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  perspective: 1000px;
+}
+
+.ring {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform-style: preserve-3d;
+}
+
+.ring::before {
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.ring::after {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ring.active {
+  transform: translateY(50%) translateX(250%) scale(2);
+
+  /* transform: translateY(-50px) scale(1.5); */
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.ring.left {
+  transform: translateX(0%) translateY(200%) translateZ(-100px) scale(0.8);
+
+  /* transform: translateX(-200px) translateZ(-100px) scale(0.8); */
+  opacity: 0.7;
+}
+
+.ring.right {
+  transform: translateX(500%) translateY(200%) translateZ(-100px) scale(0.8);
+
+  /* transform: translateX(200px) translateZ(-100px) scale(0.8); */
+  opacity: 0.7;
+}
+
+.ring-content {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.active .ring-content {
+  font-size: 1.5rem;
+}
+

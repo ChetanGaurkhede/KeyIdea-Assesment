@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotating Rings Animation</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+      /* min-height: 100vh; */
+    }
+
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      height: 100%;
+      padding: 0 1rem;
+      position: relative;
+    }
+
+    .rings-container {
+      position: relative;
+      /*left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%); */
+      transform: translate(0%, 0);
+      width: 100%;
+      height: 500px;
+      /* height: 400px; */
+      /* perspective: 1000px; */
+    }
+
+    .ring {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 1s cubic-bezier(0.55, 0.1, 0.25, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      /* border: 2px solid rgba(255, 255, 255, 0.5); */
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      transform-style: preserve-3d;
+    }
+
+    /* .ring::before {
+      content: '';
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .ring::after {
+      content: '';
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    } */
+
+    .ring.active {
+      /* top: 20px;
+      left: 50%; */
+      transform: translateY(50%) translateX(50%) scale(1);
+      z-index: 10;
+      background-color: rgba(255, 255, 255, 0.15);
+      /* border: 2px solid rgba(255, 255, 255, 0.7); */
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .ring.left {
+      /* bottom: 20px;
+      left: 20px; */
+      /* transform: translateX(-100%) translateY(100%) translateZ(-100px) scale(0.5); */
+      /* transform:  translateY(100%) translateZ(-100px) scale(0.5); */
+      transform: translateX(0%) translateY(100%) translateZ(-100px) scale(0.5);
+      /* transform: translateX(-400px) translateY(100px) translateZ(-100px) scale(0.5); */
+      opacity: 0.7;
+    }
+
+    .ring.right {
+      /* bottom: 20px;
+      right: 20px; */
+      /* transform: translateX(100%) translateY(100%) translateZ(-100px) scale(0.5); */
+      /* transform:  translateY(100px) translateZ(-100px) scale(0.5); */
+      transform: translateX(100%) translateY(100%) translateZ(-100px) scale(0.5);
+      /* transform: translateX(400px) translateY(100px) translateZ(-100px) scale(0.5); */
+      opacity: 0.7;
+    }
+
+    .ring-content {
+      /* color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center; */
+    }
+
+    .active .ring-content {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero-section">
+
+    <!-- Rings Container -->
+    <div class="container  ">
+      <div class="rings-container border" id="ringsContainer">
+        <div>
+          <div class="ring left" data-position="left" id="ring1">
+            <div class="ring-content"><img src="/images/diamond2.png" class="img-fluid" alt=""></div>
+          </div>
+          <div class="ring active" data-position="active" id="ring2">
+            <div class="ring-content"><img src="/images/diamond3.png" class="img-fluid" alt=""></div>
+          </div>
+          <div class="ring right" data-position="right" id="ring3">
+            <div class="ring-content"><img src="/images/diamond1.png" class="img-fluid" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript for ring animation -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const rings = document.querySelectorAll('.ring');
+        let autoRotate;
+
+        function startAutoRotate() {
+          autoRotate = setInterval(() => {
+            updatePositions(true);
+          }, 5000);
+        }
+
+        function stopAutoRotate() {
+          clearInterval(autoRotate);
+          setTimeout(startAutoRotate, 10000); // Restart after 10 seconds
+        }
+
+        rings.forEach(ring => {
+          ring.addEventListener('click', function () {
+            if (this.classList.contains('active')) return;
+
+            const currentPosition = this.getAttribute('data-position');
+            const activeRing = document.querySelector('.ring.active');
+            const activePosition = activeRing.getAttribute('data-position');
+
+            const clockwise = (currentPosition === 'left' && activePosition === 'active') ||
+              (currentPosition === 'active' && activePosition === 'right') ||
+              (currentPosition === 'right' && activePosition === 'left');
+
+            updatePositions(clockwise);
+            stopAutoRotate();
+          });
+        });
+
+        function updatePositions(clockwise) {
+          const positions = ['left', 'active', 'right'];
+          const newPositions = {};
+
+          rings.forEach(ring => {
+            const currentIndex = positions.indexOf(ring.getAttribute('data-position'));
+            const newIndex = (clockwise)
+              ? (currentIndex + 1) % positions.length
+              : (currentIndex - 1 + positions.length) % positions.length;
+
+            newPositions[ring.id] = positions[newIndex];
+          });
+
+          Object.entries(newPositions).forEach(([ringId, newPosition]) => {
+            const ring = document.getElementById(ringId);
+            ring.classList.remove('left', 'active', 'right');
+            ring.classList.add(newPosition);
+            ring.setAttribute('data-position', newPosition);
+          });
+        }
+
+        startAutoRotate();
+      });
+      document.addEventListener('DOMContentLoaded', function () {
+        const rings = document.querySelectorAll('.ring');
+        let autoRotate;
+
+        function startAutoRotate() {
+          autoRotate = setInterval(() => {
+            updatePositions(true);
+          }, 5000);
+        }
+
+        function stopAutoRotate() {
+          clearInterval(autoRotate);
+          setTimeout(startAutoRotate, 10000); // Restart after 10 seconds
+        }
+
+        rings.forEach(ring => {
+          ring.addEventListener('click', function () {
+            if (this.classList.contains('active')) return;
+
+            const currentPosition = this.getAttribute('data-position');
+            const activeRing = document.querySelector('.ring.active');
+            const activePosition = activeRing.getAttribute('data-position');
+
+            const clockwise = (currentPosition === 'left' && activePosition === 'active') ||
+              (currentPosition === 'active' && activePosition === 'right') ||
+              (currentPosition === 'right' && activePosition === 'left');
+
+            updatePositions(clockwise);
+            stopAutoRotate();
+          });
+        });
+
+        function updatePositions(clockwise) {
+          const positions = ['left', 'active', 'right'];
+          const newPositions = {};
+
+          rings.forEach(ring => {
+            const currentIndex = positions.indexOf(ring.getAttribute('data-position'));
+            const newIndex = (clockwise)
+              ? (currentIndex + 1) % positions.length
+              : (currentIndex - 1 + positions.length) % positions.length;
+
+            newPositions[ring.id] = positions[newIndex];
+          });
+
+          Object.entries(newPositions).forEach(([ringId, newPosition]) => {
+            const ring = document.getElementById(ringId);
+            ring.classList.remove('left', 'active', 'right');
+            ring.classList.add(newPosition);
+            ring.setAttribute('data-position', newPosition);
+          });
+        }
+
+        startAutoRotate();
+      });
+
+    </script>
+</body>
+
+</html>

@@ -40,8 +40,31 @@ window.addEventListener("scroll", function () {
   lastScrollTop = scrollTop;
 });
 
+var swiper1 = new Swiper(".swiper1", {
+  grabCursor: true,
+  centeredSlides: true,
+  speed: 900,
+  spaceBetween: 100,
+  slidesPerView: "auto",
+  effect: "coverflow",
+  loop: true,
+  coverflowEffect: {
+    rotate: 10,
+    stretch: 20,
+    depth: 990,
+    modifier: 1,
+    slideShadows: false,
+  },
+  mousewheel: {
+    invert: false,
+    thresholdDelta: 50,
+    sensitivity: 1,
+  },
+});
 
-var swiper = new Swiper(".swiper", {
+
+
+var swiper2 = new Swiper(".swiper2", {
   effect: "coverflow",
   grabCursor: true,
   centeredSlides: true,
@@ -63,4 +86,89 @@ var swiper = new Swiper(".swiper", {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const rings = document.querySelectorAll('.ring');
+
+  // Add click event listeners to each ring
+  rings.forEach(ring => {
+    ring.addEventListener('click', function () {
+      // Skip if already active
+      if (this.classList.contains('active')) return;
+
+      const currentPosition = this.getAttribute('data-position');
+      const activeRing = document.querySelector('.ring.active');
+      const activePosition = activeRing.getAttribute('data-position');
+
+      // Determine rotation direction
+      const clockwise = (currentPosition === 'left' && activePosition === 'active') ||
+        (currentPosition === 'active' && activePosition === 'right') ||
+        (currentPosition === 'right' && activePosition === 'left');
+
+      // Update positions based on clicked ring
+      if (currentPosition === 'left') {
+        // Left ring was clicked - rotate clockwise
+        updatePositions(clockwise);
+      } else if (currentPosition === 'right') {
+        // Right ring was clicked - rotate counter-clockwise
+        updatePositions(clockwise);
+      }
+    });
+  });
+
+  // Function to update positions of all rings
+  function updatePositions(clockwise) {
+    const positions = ['left', 'active', 'right'];
+
+    // Get current position of each ring
+    const currentPositions = {};
+    rings.forEach(ring => {
+      currentPositions[ring.id] = ring.getAttribute('data-position');
+    });
+
+    // Calculate new positions
+    const newPositions = {};
+    for (const [ringId, position] of Object.entries(currentPositions)) {
+      const currentIndex = positions.indexOf(position);
+      let newIndex;
+
+      if (clockwise) {
+        // Rotate clockwise
+        newIndex = (currentIndex + 1) % positions.length;
+      } else {
+        // Rotate counter-clockwise
+        newIndex = (currentIndex - 1 + positions.length) % positions.length;
+      }
+
+      newPositions[ringId] = positions[newIndex];
+    }
+
+    // Apply new positions
+    for (const [ringId, newPosition] of Object.entries(newPositions)) {
+      const ring = document.getElementById(ringId);
+
+      // Remove all position classes
+      ring.classList.remove('left', 'active', 'right');
+
+      // Add new position class
+      ring.classList.add(newPosition);
+
+      // Update data attribute
+      ring.setAttribute('data-position', newPosition);
+    }
+  }
+
+  // Add automatic rotation for demo purposes (optional)
+  let autoRotate = setInterval(() => {
+    updatePositions(true);
+  }, 5000);
+
+  // Stop auto-rotation when user interacts
+  rings.forEach(ring => {
+    ring.addEventListener('click', () => {
+      clearInterval(autoRotate);
+    });
+  });
 });
