@@ -68,12 +68,12 @@
   flex-wrap: wrap;
 }
 .card {
-  width: calc(100% / 4 - 16px); 
-  min-width: 160px; 
+  width: calc(100% / 4 - 16px);
+  min-width: 160px;
 }
 @media (max-width: 768px) {
   .card {
-    width: calc(100% /2  - 16px); 
+    width: calc(100% / 2 - 16px);
     /* width: 50px; */
   }
 }
@@ -83,7 +83,7 @@
 }
 
 .diamond-card {
-  width: 240px; 
+  width: 240px;
   /* border-radius: 5px; */
   overflow: hidden;
   /* padding: 15px; */
@@ -98,63 +98,145 @@
 .swiper-slide {
   width: 200px;
 
-.swiper {
-  width: 100%;
-  height: 500px; 
+  .swiper {
+    width: 100%;
+    height: 500px;
+  }
+
+  .swiper-wrapper {
+    height: 400px;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .card-desc {
+    font-size: 14px;
+  }
+
+  .swiper1 {
+    width: 100%;
+    height: 500px;
+  }
+
+  .swiper1 .swiper-wrapper {
+    display: flex;
+    align-items: center;
+    overflow: visible; /* Prevent clipping */
+  }
+
+  .swiper1 .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    transition: transform 0.5s ease-in-out;
+    transform-origin: center;
+  }
+
+  /* Scale up the active slide */
+  .swiper1 .swiper-slide-active {
+    transform: scale(2); /* 2x bigger */
+    z-index: 10;
+  }
+
+  /* Ensure the image fills its container */
+  .swiper1 .swiper-slide img {
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .hero-section {
+    /* position: relative; */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .rings-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    perspective: 1000px;
+  }
+
+  .ring {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+  }
+
+  .ring::before {
+    content: "";
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .ring::after {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .ring.active {
+    transform: translateY(50%) translateX(250%) scale(2);
+
+    /* transform: translateY(-50px) scale(1.5); */
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateX(0%) translateY(200%) translateZ(-100px) scale(0.8);
+
+    /* transform: translateX(-200px) translateZ(-100px) scale(0.8); */
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateX(500%) translateY(200%) translateZ(-100px) scale(0.8);
+
+    /* transform: translateX(200px) translateZ(-100px) scale(0.8); */
+    opacity: 0.7;
+  }
+
+  .ring-content {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .active .ring-content {
+    font-size: 1.5rem;
+  }
 }
-
-.swiper-wrapper{
-  height: 400px;
-}
-
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.card-desc {
-  font-size: 14px;
-}
-
-.swiper1 {
-  width: 100%;
-  height: 500px;
-}
-
-.swiper1 .swiper-wrapper {
-  display: flex;
-  align-items: center;
-  overflow: visible; /* Prevent clipping */
-}
-
-.swiper1 .swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  transition: transform 0.5s ease-in-out;
-  transform-origin: center;
-}
-
-/* Scale up the active slide */
-.swiper1 .swiper-slide-active {
-  transform: scale(2); /* 2x bigger */
-  z-index: 10;
-}
-
-/* Ensure the image fills its container */
-.swiper1 .swiper-slide img {
-  width: 100%;
-  transition: transform 0.5s ease-in-out;
-}
-
-
-
 .hero-section {
-  /* position: relative; */
-  height: 100vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,7 +246,7 @@
 .rings-container {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 100%;
   perspective: 1000px;
 }
 
@@ -172,68 +254,219 @@
   position: absolute;
   width: 180px;
   height: 180px;
-  border-radius: 50%;
   cursor: pointer;
   transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   transform-style: preserve-3d;
-}
-
-.ring::before {
-  content: '';
-  position: absolute;
-  width: 90%;
-  height: 90%;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.ring::after {
-  content: '';
-  position: absolute;
-  width: 70%;
-  height: 70%;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 100;
 }
 
 .ring.active {
-  transform: translateY(50%) translateX(250%) scale(2);
-
-  /* transform: translateY(-50px) scale(1.5); */
+  transform: translateY(0%) translateX(350%) scale(1.6);
   z-index: 10;
   background-color: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.7);
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
 }
 
 .ring.left {
-  transform: translateX(0%) translateY(200%) translateZ(-100px) scale(0.8);
-
-  /* transform: translateX(-200px) translateZ(-100px) scale(0.8); */
+  transform: translateY(50%) translateX(-50%) translateZ(-100px) scale(0.5);
   opacity: 0.7;
+}
+
+.ring.left h1 {
+  opacity: 0;
+}
+
+.ring.left .ring-des {
+  opacity: 0;
 }
 
 .ring.right {
-  transform: translateX(500%) translateY(200%) translateZ(-100px) scale(0.8);
-
-  /* transform: translateX(200px) translateZ(-100px) scale(0.8); */
+  transform: translateY(50%) translateX(700%) translateZ(-100px) scale(0.5);
   opacity: 0.7;
 }
 
-.ring-content {
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
+.ring.right h1 {
+  opacity: 0;
+}
+
+.ring.right .ring-des {
+  opacity: 0;
+}
+
+/* Media Query for max-width: 768px */
+@media (max-width: 1400px) {
+
+
+  .ring.active {
+    transform: translateY(0%) translateX(275%) scale(1.4);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(65%) translateX(-50%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(75%) translateX(600%) translateZ(-225px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hero-section {
+    height: 50vh;
+  }
+
+  .ring.active {
+    transform: translateY(0%) translateX(210%) scale(1.4);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(20%) translateX(-50%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(40%) translateX(475%) translateZ(-225px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 1000px) {
+
+
+  .ring.active {
+    transform: translateY(10%) translateX(170%) scale(1.4);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(20%) translateX(-60%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(40%) translateX(400%) translateZ(-225px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 900px) {
+  .ring.active {
+    transform: translateY(40%) translateX(150%) scale(1.4);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(20%) translateX(-25%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(40%) translateX(350%) translateZ(-225px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .ring.active {
+    transform: translateY(20%) translateX(100%) scale(1.25);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(20%) translateX(-75%) translateZ(-100px) scale(0.65);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(20%) translateX(250%) translateZ(-100px) scale(0.65);
+    opacity: 0.7;
+  }
+}
+
+/* Media Query for max-width: 576px (smaller screens) */
+@media (max-width: 677px) {
+  .ring.active {
+    transform: translateY(0%) translateX(100%) scale(1.25);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(20%) translateX(-25%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(20%) translateX(210%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 576px) {
+  .ring.active {
+    transform: translateY(-30%) translateX(100%) scale(1.1);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(-30%) translateX(-25%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(-30%) translateX(210%) translateZ(-100px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 450px) {
+  .ring.active {
+    transform: translateY(-50%) translateX(70%) scale(0.9);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .ring.left {
+    transform: translateY(-50%) translateX(-25%) translateZ(-100px) scale(0.6);
+    opacity: 0.7;
+  }
+
+  .ring.right {
+    transform: translateY(-50%) translateX(150%) translateZ(-100px) scale(0.6);
+    opacity: 0.7;
+  }
+}
+
+.ring-font {
+  font-size: 5rem;
+  opacity: 0.1;
+  min-width: 1000px;
   text-align: center;
 }
 
-.active .ring-content {
-  font-size: 1.5rem;
+.ring-des {
+ min-width: 600px;
 }
-
