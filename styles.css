@@ -302,10 +302,8 @@
 
 /* Media Query for max-width: 768px */
 @media (max-width: 1400px) {
-
-
   .ring.active {
-    transform: translateY(0%) translateX(275%) scale(1.4);
+    transform: translateY(-10%) translateX(275%) scale(1.4);
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.15);
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
@@ -346,8 +344,6 @@
 }
 
 @media (max-width: 1000px) {
-
-
   .ring.active {
     transform: translateY(10%) translateX(170%) scale(1.4);
     z-index: 10;
@@ -386,8 +382,6 @@
 }
 
 @media (max-width: 768px) {
-
-
   .ring.active {
     transform: translateY(20%) translateX(100%) scale(1.25);
     z-index: 10;
@@ -472,5 +466,5 @@
 }
 
 .ring-des {
- min-width: 600px;
+  min-width: 600px;
 }
