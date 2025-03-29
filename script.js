@@ -5,14 +5,14 @@ const mobileNav = document.querySelector(".container-fluid.block");
 // Handle active link change
 navLinks.forEach(link => {
   link.addEventListener("click", function () {
-    navLinks.forEach(nav => nav.classList.remove("active")); // Remove active class
-    this.classList.add("active"); // Add active class to clicked link
+    navLinks.forEach(nav => nav.classList.remove("active"));
+    this.classList.add("active"); 
   });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
   const menu = document.querySelector(".menu-container");
-  const openBtn = document.querySelector("#open-nav-list"); // Add an "Open" button in your HTML
+  const openBtn = document.querySelector("#open-nav-list"); 
   const closeBtn = document.querySelector("#close-nav-list");
 
   openBtn.addEventListener("click", function () {
@@ -40,27 +40,7 @@ window.addEventListener("scroll", function () {
   lastScrollTop = scrollTop;
 });
 
-var swiper1 = new Swiper(".swiper1", {
-  grabCursor: true,
-  centeredSlides: true,
-  speed: 900,
-  spaceBetween: 100,
-  slidesPerView: "auto",
-  effect: "coverflow",
-  loop: true,
-  coverflowEffect: {
-    rotate: 10,
-    stretch: 20,
-    depth: 990,
-    modifier: 1,
-    slideShadows: false,
-  },
-  mousewheel: {
-    invert: false,
-    thresholdDelta: 50,
-    sensitivity: 1,
-  },
-});
+
 
 
 
@@ -109,10 +89,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Update positions based on clicked ring
       if (currentPosition === 'left') {
-        // Left ring was clicked - rotate clockwise
+        //  - rotate clockwise
+        console.log("left")
         updatePositions(clockwise);
       } else if (currentPosition === 'right') {
-        // Right ring was clicked - rotate counter-clockwise
+        console.log("right")
+        // - rotate counter-clockwise
         updatePositions(clockwise);
       }
     });
